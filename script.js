@@ -14,6 +14,17 @@ const inputElevation = document.querySelector('.form__input--elevation');
 let map;
 let mapEvent;
 
+class Workout {
+  date = new Date();
+  id = (new Date() + '').slice(-10);
+
+  constructor(coords, distance, duration) {
+    this.coords = coords;
+    this.distance = distance;
+    this.duration = duration;
+  }
+}
+
 class App {
   #map;
   #mapEvent;
