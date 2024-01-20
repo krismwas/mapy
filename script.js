@@ -16,12 +16,12 @@ let mapEvent;
 
 class Workout {
   date = new Date();
-  id = (new Date() + '').slice(-10);
+  id = (Date.now() + '').slice(-10);
 
   constructor(coords, distance, duration) {
-    this.coords = coords;
-    this.distance = distance;
-    this.duration = duration;
+    this.coords = coords; //[lat, long]
+    this.distance = distance; // km
+    this.duration = duration; // mins
   }
 }
 
@@ -40,6 +40,22 @@ class Runnning extends Workout {
   }
 }
 
+class Cycling extends Workout {
+  constructor(coords, distance, duration, elevationGain) {
+    super(coords, distance, duration);
+    this.elevationGain = elevationGain;
+
+    this.calcSpeed();
+  }
+
+  calcSpeed() {
+    // km / h
+    this.speed = this.distance / (this.duration / 60);
+    return this.speed;
+  }
+}
+
+// application architecture
 class App {
   #map;
   #mapEvent;
